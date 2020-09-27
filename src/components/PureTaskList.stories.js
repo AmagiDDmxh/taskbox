@@ -1,6 +1,5 @@
-import TaskList from './TaskList'
+import TaskList from './PureTaskList'
 import { taskData, actionsData } from './Task.stories'
-
 
 const paddedList = () => {
   return {
@@ -19,13 +18,15 @@ export const defaultTasksData = [
   { ...taskData, id: "3", title: "Task 3" },
   { ...taskData, id: "4", title: "Task 4" },
   { ...taskData, id: "5", title: "Task 5" },
-  { ...taskData, id: "6", title: "Task 6" }
 ]
 export const withPinnedTasksData = [
-  ...defaultTasksData.slice(0, 5),
+  ...defaultTasksData.slice(),
   { id: "6", title: "Task 6 (pinned)", state: "TASK_PINNED" }
 ];
-
+export const withArchivedTasksData = [
+  ...defaultTasksData.slice(),
+  { id: "6", title: "Task 6 (archived)", state: "TASK_ARCHIVED" },
+]
 
 export const Default = () => ({
   components: { TaskList },
@@ -49,19 +50,30 @@ export const WithPinnedTasks = () => ({
   methods: actionsData
 })
 
+export const WithArchivedTasks = () => ({
+  components: { TaskList },
+  template: `<task-list :tasks="tasks" @archiveTask="onArchiveTask" @pinTask="onPinTask"/>`,
+  props: {
+    tasks: {
+      default: () => withArchivedTasksData
+    }
+  },
+  methods: actionsData
+})
+
 export const Loading = () => ({
   components: { TaskList },
   template: `<task-list loading @archiveTask="onArchiveTask" @pinTask="onPinTask"/>`,
   methods: actionsData
 });
 
-/* export const Empty = () => ({
+export const Empty = () => ({
   components: { TaskList },
   template: `<task-list @archiveTask="onArchiveTask" @pinTask="onPinTask"/>`,
   methods: actionsData
-}); */
+});
 
-export const Empty = () => ({
+export const EmptyWithLoading = () => ({
   components: { TaskList },
   template: `<task-list :tasks="tasks" loading @archiveTask="onArchiveTask" @pinTask="onPinTask"/>`,
   props: {

@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import TaskList from '../../src/components/TaskList.vue'
-import { withPinnedTasksData } from '../../src/components/TaskList.stories'
+import PureTaskList from '../../src/components/PureTaskList.vue'
+import { withPinnedTasksData } from '../../src/components/PureTaskList.stories'
 
-it('', () => {
-  const Constrocutor = Vue.extend(TaskList)
+it('renders pinned tasks at the start of the list', () => {
+  const Constrocutor = Vue.extend(PureTaskList)
   const vm = new Constrocutor({
     propsData: { tasks: withPinnedTasksData }
   }).$mount()

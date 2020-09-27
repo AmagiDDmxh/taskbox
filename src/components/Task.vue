@@ -7,7 +7,7 @@
         :disabled="true"
         name="checked"
       />
-      <span class="checkbox-custom" @click="$emit('archive-task', task.id)" />
+      <span class="checkbox-custom" @click="$emit('archiveTask', task.id)" />
     </label>
     <div class="title">
       <input
@@ -18,7 +18,7 @@
       />
     </div>
     <div class="actions">
-      <a @click="$emit('pin-task', task.id)" v-if="!isChecked">
+      <a @click="$emit('pinTask', task.id)" v-if="!isChecked">
         <span class="icon-star" />
       </a>
     </div>
